@@ -35,7 +35,7 @@ jobs:
         sudo -E apt-get -qq clean
 
     - name: SSH connection to Actions
-      uses: yIwIoTT9A21nupT/debugger-action@master
+      uses: fangxx3863/debugger-action@master
       if: contains(github.event.action,'ssh')
 
     - name: Clone source code

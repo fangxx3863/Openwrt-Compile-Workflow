@@ -131,11 +131,4 @@ jobs:
         ./transfer wet -s -p 16 --no-progress $FIRMWARE 2>&1 | tee wetransfer.log
         echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
 
-    - name: Telegram notification
-      env:
-        TG_ID: ${{secrets.TG_ID}}
-        TG_KEY: ${{secrets.TG_KEY}}
-      if: env.TG_ID && env.TG_KEY
-      continue-on-error: true
-      run: |
-        curl -m 9 --retry 3 -Ssd "chat_id=$TG_ID&text=OpenWrt_firmware$DEVICE_NAME$VERSION$FILE_DATE $([ "${{steps.compile.outputs.status}}" = success ] && echo 编译成功 || echo 编译失败)" https://api.telegram.org/bot$TG_KEY/sendMessage >/dev/null
+ 
